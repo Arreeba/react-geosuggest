@@ -128,6 +128,8 @@ var Geosuggest = function (_React$Component) {
     };
 
     _this.selectSuggest = function (suggest) {
+      _this.autocompleteSessionToken = new _this.googleMaps.places.AutocompleteSessionToken();
+
       if (!suggest) {
         suggest = {
           label: _this.state.userInput
@@ -207,6 +209,7 @@ var Geosuggest = function (_React$Component) {
 
       this.autocompleteService = new googleMaps.places.AutocompleteService();
       this.geocoder = new googleMaps.Geocoder();
+      this.autocompleteSessionToken = new googleMaps.places.AutocompleteSessionToken();
     }
 
     /**
@@ -317,6 +320,8 @@ var Geosuggest = function (_React$Component) {
           country: this.props.country
         };
       }
+
+      options.sessionToken = this.autocompleteSessionToken;
 
       this.setState({ isLoading: true }, function () {
         _this2.autocompleteService.getPlacePredictions(options, function (suggestsGoogle) {
