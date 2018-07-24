@@ -80,6 +80,8 @@ class Geosuggest extends React.Component {
 
     this.autocompleteService = new googleMaps.places.AutocompleteService();
     this.geocoder = new googleMaps.Geocoder();
+    this.autocompleteSessionToken =
+      new googleMaps.places.AutocompleteSessionToken();
   }
 
   /**
@@ -198,6 +200,8 @@ class Geosuggest extends React.Component {
         country: this.props.country
       };
     }
+
+    options.sessionToken = this.autocompleteSessionToken;
 
     this.setState({isLoading: true}, () => {
       this.autocompleteService.getPlacePredictions(
@@ -346,6 +350,9 @@ class Geosuggest extends React.Component {
    * @param {GeosuggestItem} suggest The selected suggest item
    */
   selectSuggest = suggest => {
+    this.autocompleteSessionToken =
+      new this.googleMaps.places.AutocompleteSessionToken();
+
     if (!suggest) {
       suggest = {
         label: this.state.userInput
