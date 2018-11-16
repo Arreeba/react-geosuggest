@@ -180,7 +180,8 @@ class Geosuggest extends React.Component {
     }
 
     const options = {
-        input: this.state.userInput
+        input: this.state.userInput,
+        fields: ['address_components'],
       },
       inputLength = this.state.userInput.length,
       isShorterThanMinLength = inputLength < this.props.minLength;
